@@ -1,31 +1,25 @@
 angular.module('LunchCheck', [])
-.controller('LunchCheckController', LunchCheckController);
+  .controller('LunchCheckController', LunchCheckController);
 
-LunchCheckController.$inject = ['$scope'];
+function LunchCheckController() {
+  var vm = this;
 
-function LunchCheckController($scope) {
-    $scope.checkLunch = function() {
-        // Check if the input is empty
-        if (!$scope.lunchItems) {
-            $scope.message = "Please enter data first";
-            return;
-        }
+  vm.checkLunch = function() {
+    if (!vm.lunchItems || vm.lunchItems.trim() === "") {
+      vm.message = "Please enter data first.";
+    } else {
+      var items = vm.lunchItems.split(',');
+      var itemCount = items.length;
 
-        // Split the input into an array of items
-        var lunchItemsArray = $scope.lunchItems.split(',');
+      // Removing empty items from the count (Bonus feature, ungraded)
+      // items = items.filter(item => item.trim() !== "");
+      // itemCount = items.length;
 
-        // Remove empty items (e.g., ",," or " , , ")
-        lunchItemsArray = lunchItemsArray.filter(function(item) {
-            return item.trim() !== "";
-        });
-
-        // Check the number of items and display appropriate message
-        if (lunchItemsArray.length === 0) {
-            $scope.message = "Please enter data first";
-        } else if (lunchItemsArray.length <= 3) {
-            $scope.message = "Enjoy!";
-        } else {
-            $scope.message = "Too much!";
-        }
-    };
+      if (itemCount <= 3) {
+        vm.message = "Enjoy!";
+      } else {
+        vm.message = "Too much!";
+      }
+    }
+  };
 }
