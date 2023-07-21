@@ -1,31 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ShoppingListApp">
+
 <head>
-    <title>Shopping List</title>
-    <style>
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping List</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
-<body>
-    <h1>Shopping List</h1>
 
-    <h2>To Buy</h2>
-    <ul id="toBuyList">
-        <!-- Items will be dynamically added here using JavaScript -->
-    </ul>
+<body ng-controller="ShoppingListController as listCtrl">
+  <h2>To Buy:</h2>
+  <ul>
+    <li ng-repeat="item in listCtrl.toBuyList">
+      Buy {{ item.quantity }} {{ item.name }}
+      <button ng-click="listCtrl.buyItem(item)">Bought</button>
+    </li>
+  </ul>
 
-    <h2>Already Bought</h2>
-    <ul id="alreadyBoughtList">
-        <li id="nothingBoughtYet">Nothing bought yet</li>
-    </ul>
+  <h2>Already Bought:</h2>
+  <p ng-if="listCtrl.alreadyBoughtList.length === 0">Nothing bought yet.</p>
+  <ul>
+    <li ng-repeat="item in listCtrl.alreadyBoughtList">
+      Bought {{ item.quantity }} {{ item.name }}
+    </li>
+  </ul>
 
-    <script src="app.js"></script>
+  <p ng-if="listCtrl.toBuyList.length === 0 && listCtrl.alreadyBoughtList.length > 0">Everything is bought!</p>
+
+  <script src="app.js"></script>
 </body>
+
 </html>
