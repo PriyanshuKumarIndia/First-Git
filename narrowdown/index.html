@@ -1,39 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="MenuSearchApp">
+<html ng-app="NarrowItDownApp">
+
 <head>
-    <title>Menu Search</title>
-    <style>
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-    </style>
+  <title>Narrow It Down Menu Search</title>
 </head>
-<body ng-controller="NarrowItDownController as narrowCtrl">
-    <h1>Menu Search</h1>
 
-    <input type="text" ng-model="narrowCtrl.searchTerm" placeholder="Search menu items">
-    <button ng-click="narrowCtrl.narrowItDown()">Narrow It Down For Me!</button>
+<body>
+  <div ng-controller="NarrowItDownController as narrow">
+    <h1>Narrow Down Menu Items</h1>
+    <input type="text" ng-model="narrow.searchTerm">
+    <button ng-click="narrow.narrowItDown()">Narrow It Down For Me!</button>
+    <found-items found-items="narrow.foundItems" on-remove="narrow.removeItem(index)"></found-items>
+  </div>
 
-    <div ng-show="narrowCtrl.found.length > 0">
-        <h2>Found Items</h2>
-        <ul>
-            <li ng-repeat="item in narrowCtrl.found">
-                {{ item.name }}, {{ item.short_name }}, {{ item.description }}
-                <button ng-click="narrowCtrl.dontWantThis($index)">Don't want this one!</button>
-            </li>
-        </ul>
-    </div>
-
-    <div ng-show="narrowCtrl.found.length === 0 && narrowCtrl.searched">
-        <p>Nothing found</p>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="app.js"></script>
+  <script src="path/to/angular.js"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>
