@@ -44,7 +44,7 @@ let questions = [
   {
     numb: 6,
     question: "Please, Rate this Portal!",
-    answer: "None",
+    answer: "Need some improvement",
     options: ["Good", "Need some improvement", "Not good", "None"],
   },
 ];

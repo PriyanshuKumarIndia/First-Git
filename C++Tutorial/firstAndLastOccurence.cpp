@@ -16,7 +16,7 @@ int binarySearch(int arr[],int size,int key){
 }
 int main(){
     int arr[]={1,1,1,5,5,5,5,5,5,5,7,7,7,7,7,9,9,9,11,11};
-    int size=20,key=10;
+    int size=20,key=5;
     int temp=binarySearch(arr,size,key);
     int first=temp,last=temp,count;
     while(true){
