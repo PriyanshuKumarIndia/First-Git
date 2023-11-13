@@ -14,7 +14,8 @@ void merge(int *arr,int low,int high){
     int mid=low +(high-low)/2;
     int len1=mid-low+1;
     int len2=high-mid;
-    int arr1[len1],arr2[len2];
+    int *arr1= new int[len1];
+    int *arr2= new int[len2];
     int mainIndex=low;
     for(int i=0;i<len1;i++,mainIndex++){
       arr1[i]=arr[mainIndex];
@@ -25,7 +26,7 @@ void merge(int *arr,int low,int high){
     mainIndex=low;
     int i=0,j=0;
     while(i<len1 && j<len2){
-      if(arr1[i]<=arr2[j]){
+      if(arr1[i]<arr2[j]){
           arr[mainIndex]=arr1[i];
           i++;
       }
@@ -43,6 +44,9 @@ void merge(int *arr,int low,int high){
       arr[mainIndex]=arr2[j];
       j++;mainIndex++;
     }
+
+    delete []arr1;
+    delete []arr2;
 }
 
 void mergeSort(int arr[],int low,int high){
@@ -54,8 +58,8 @@ void mergeSort(int arr[],int low,int high){
 }
 
 int main(){
-  int size=16;
-  int arr[]={44,5,5,43,3,3,3322,11,12,45,5,1245,43,45,35,1,};
+  int size=5;
+  int arr[]={1,20,6,4,5};
   mergeSort(arr,0,size-1);
   display(arr,size);
 }

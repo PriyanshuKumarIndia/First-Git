@@ -1,0 +1,32 @@
+.yt-img{
+    width: 300px;
+    display: block;
+}
+
+.Search-bar{
+    margin-bottom: 10px;
+}
+
+#Left-side{
+    width: 300px;
+    font-family: arial;
+    display: inline-block;
+}
+
+#V-title,#M-title,#L-title{
+    margin: 0px;
+}
+
+#V-title{
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+#M-title{
+    margin-bottom: 5px;
+}
+
+#L-title,#M-title{
+    color: rgb(96,96,96);
+    font-size: 15px;
+}
