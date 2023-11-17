@@ -1,3 +1,39 @@
+.Header{
+    margin-bottom: 10px;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.Left-portion{
+    justify-content: left;
+    background-color: lightblue;
+    width: 180px;
+}
+
+.Middle-portion{
+    justify-content: center;
+    background-color: lightpink;
+    flex: 1;
+    margin-left: 70px;
+    margin-right: 60px;
+    max-width: 300px;
+}
+
+.Right-portion{
+    justify-content: right;
+    background-color: lightgreen;
+    width: 160px;
+}
+
+
+
+body{
+    margin: 0px;
+}
+
 .Main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -5,7 +41,6 @@
     column-gap: 15px;
     row-gap: 40px;
 }
-
 
 .Cat{
     width: 100%;
