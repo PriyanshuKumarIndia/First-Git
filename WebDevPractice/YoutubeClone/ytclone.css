@@ -4,28 +4,101 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* align-items: center; */
+    
+}
+
+.Upload-img{
+    height: 27px;
+}
+
+.Channel-img{
+    height: 30px;
+    border-radius: 15px;
+}
+
+.R1{
+    height: 30px;
+    width: 40px;
+}
+
+.Menu-logo{
+    height: 26px;
+    margin: 0px 24px;
+}
+
+.Youtube-logo{
+    height: 20px;
+}
+
+.Voice-logo{
+    height: 25px;
+    width: 25px;
+}
+
+.Search-box{
+    height: 35px;
+    flex: 1;
+    margin-left: 10px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(96,96,96);
+    box-shadow: inset 0px 1px 2px rgba(0,0,0,0.3);
+    width: 35px;
+}
+
+.Search-box::placeholder{
+    padding-left: 13px;
+    font-size: 16px;
+}
+
+.Search-button{
+    height: 38px;
+    width: 60px;
+    padding: 0px 15px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-right: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(96,96,96);
+    margin-left: -1px;
+    /* border-left-width: 0px; */
+}
+
+.Voice-button{
+    height: 38px;
+    width: 38px;
+    border-radius: 30px;
+    margin-right: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(96,96,96);
 }
 
 .Left-portion{
+    display: flex;
+    align-items: center;
     justify-content: left;
-    background-color: lightblue;
     width: 180px;
 }
 
 .Middle-portion{
-    justify-content: center;
-    background-color: lightpink;
+    display: flex;
+    align-items: center;
     flex: 1;
     margin-left: 70px;
     margin-right: 60px;
-    max-width: 300px;
+    max-width: 660px;
 }
 
 .Right-portion{
-    justify-content: right;
-    background-color: lightgreen;
-    width: 160px;
+    display: flex;
+    align-items: center;
+    width: 190px;
+    justify-content: space-between;
+    margin-right: 10px;
 }
 
 

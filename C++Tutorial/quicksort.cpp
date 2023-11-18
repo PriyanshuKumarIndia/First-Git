@@ -1,38 +1,53 @@
 #include<bits/stdc++.h>
 using namespace std;
-int partition(int array[],int lb,int ub){
-    int p=array[lb],start=lb,end=ub;
-    while(lb<ub){
-        while(array[start]<=p){
-            start++;
-        }
-        while(array[end]>p){
-            end--;
-        }
-        if(start<end){
-            swap(array[start],array[end]);
-        }
-    }
-    swap(array[lb],array[end]);
-     return end;
+
+void display(int arr[],int size){
+	for(int i=0;i<size;i++){
+		cout<<arr[i]<<" ";
+	}cout<<endl;
 }
-int quicksort(int array[],int lb,int ub){
-    int pos;
-    if(lb<ub){
-        pos=partition(array,lb,ub);
-        quicksort(array,lb,pos-1);
-        quicksort(array,pos+1,ub);
-    }
+
+int CPos(int arr[],int low,int high){
+    int size=high-low+1;
+    if(size<=1) return low;
+    int key=arr[low];
+    int i=low+1,j=high;
+
+	while(true){
+		while(arr[i]<key) i++;
+		while(arr[j]>key) j--;
+		if(i>j){
+			swap(arr[low],arr[j]);
+			break;
+		}
+		else{
+			swap(arr[i],arr[j]);
+			i++;j--;
+		}
+	}
+    return j;
 }
-void display(int array[],int size){
-    for(int i=0;i<size;i++){
-        cout<<array[i]<<" ";
-    }
+
+void quickSort(int arr[],int low,int high){
+      if(low>=high){
+        return;
+      }
+
+      int Index;
+      Index=CPos(arr,low,high);
+      quickSort(arr,low,Index-1);
+      quickSort(arr,Index+1,high);
+      return;
+
 }
+
 int main(){
-    int array[]={12,45,78,34,56,90,65,43},lb=0,ub=7;
-    display(array,8);
-    quicksort(array,lb,ub);
-    cout<<"\nFunction called !"<<endl;
-    display(array,8);
+	int size=9;
+	int arr[]={14,18,23,78,45,479,145,546,85};
+    int low=0,high=size-1;
+	cout<<"Before :"<<endl;
+	display(arr,size);
+    quickSort(arr,low,high);
+    cout<<"After :"<<endl;
+    display(arr,size);
 }

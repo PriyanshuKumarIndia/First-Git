@@ -1,122 +1,175 @@
-#include<bits/stdc++.h>
-using namespace std;
-class Node
-{
-	public:
-	int key;
-	Node *left;
-	Node *right;
-	int height;
-};
+// C++ program for the above approach 
+#include <iostream> 
+using namespace std; 
 
-int height(Node *N)
-{
-	if (N == NULL)
-		return 0;
-	return N->height;
-}
+// Node class to represent 
+// a node of the linked list. 
+class Node { 
+public: 
+	int data; 
+	Node* next; 
 
-int max(int a, int b)
-{
-	return (a > b)? a : b;
-}
+	// Default constructor 
+	Node() 
+	{ 
+		data = 0; 
+		next = NULL; 
+	} 
 
-Node* newNode(int key)
-{
-	Node* node = new Node();
-	node->key = key;
-	node->left = NULL;
-	node->right = NULL;
-	node->height = 1;
-	return(node);
-}
+	// Parameterised Constructor 
+	Node(int data) 
+	{ 
+		this->data = data; 
+		this->next = NULL; 
+	} 
+}; 
 
-Node *rightRotate(Node *y)
-{
-	Node *x = y->left;
-	Node *T2 = x->right;
-	x->right = y;
-	y->left = T2;
-	y->height = max(height(y->left),
-					height(y->right)) + 1;
-	x->height = max(height(x->left),
-					height(x->right)) + 1;
-	return x;
-}
+// Linked list class to 
+// implement a linked list. 
+class Linkedlist { 
+	Node* head; 
 
-Node *leftRotate(Node *x)
-{
-	Node *y = x->right;
-	Node *T2 = y->left;
-	y->left = x;
-	x->right = T2;
-	x->height = max(height(x->left),
-					height(x->right)) + 1;
-	y->height = max(height(y->left),
-					height(y->right)) + 1;
-	return y;
-}
+public: 
+	// Default constructor 
+	Linkedlist() { head = NULL; } 
 
-int getBalance(Node *N)
-{
-	if (N == NULL)
-		return 0;
-	return height(N->left) - height(N->right);
-}
-Node* insert(Node* node, int key)
-{
-	if (node == NULL)
-		return(newNode(key));
+	// Function to insert a 
+	// node at the end of the 
+	// linked list. 
+	void insertNode(int); 
 
-	if (key < node->key)
-		node->left = insert(node->left, key);
-	else if (key > node->key)
-		node->right = insert(node->right, key);
-	else 
-		return node;
-	node->height = 1 + max(height(node->left),
-						height(node->right));
-	int balance = getBalance(node);
-	if (balance > 1 && key < node->left->key)
-		return rightRotate(node);
-	if (balance < -1 && key > node->right->key)
-		return leftRotate(node);
-	if (balance > 1 && key > node->left->key)
-	{
-		node->left = leftRotate(node->left);
-		return rightRotate(node);
-	}
-	if (balance < -1 && key < node->right->key)
-	{
-		node->right = rightRotate(node->right);
-		return leftRotate(node);
-	}
-	return node;
-}
+	// Function to print the 
+	// linked list. 
+	void printList(); 
 
-void preOrder(Node *root)
-{
-	if(root != NULL)
-	{
-		cout << root->key << " ";
-		preOrder(root->left);
-		preOrder(root->right);
-	}
-}
+	// Function to delete the 
+	// node at given position 
+	void deleteNode(int); 
+}; 
 
-int main()
-{
-	Node *root = NULL;
-   cout<<"Inserting Sucessfull!"<<endl;
-	root = insert(root, 10);
-	root = insert(root, 20);
-	root = insert(root, 30);
-	root = insert(root, 40);
-	root = insert(root, 50);
-	root = insert(root, 25);
-	cout << "Preorder traversal of the "
-			"constructed AVL tree is \n";
-	preOrder(root);
-	
-	return 0;
+// Function to delete the 
+// node at given position 
+void Linkedlist::deleteNode(int nodeOffset) 
+{ 
+	Node *temp1 = head, *temp2 = NULL; 
+	int ListLen = 0; 
+
+	if (head == NULL) { 
+		cout << "List empty." << endl; 
+		return; 
+	} 
+
+	// Find length of the linked-list. 
+	while (temp1 != NULL) { 
+		temp1 = temp1->next; 
+		ListLen++; 
+	} 
+
+	// Check if the position to be 
+	// deleted is greater than the length 
+	// of the linked list. 
+	if (ListLen < nodeOffset) { 
+		cout << "Index out of range"
+			<< endl; 
+		return; 
+	} 
+
+	// Declare temp1 
+	temp1 = head; 
+
+	// Deleting the head. 
+	if (nodeOffset == 1) { 
+
+		// Update head 
+		head = head->next; 
+		delete temp1; 
+		return; 
+	} 
+
+	// Traverse the list to 
+	// find the node to be deleted. 
+	while (nodeOffset-- > 1) { 
+
+		// Update temp2 
+		temp2 = temp1; 
+
+		// Update temp1 
+		temp1 = temp1->next; 
+	} 
+
+	// Change the next pointer 
+	// of the previous node. 
+	temp2->next = temp1->next; 
+
+	// Delete the node 
+	delete temp1; 
+} 
+
+// Function to insert a new node. 
+void Linkedlist::insertNode(int data) 
+{ 
+	// Create the new Node. 
+	Node* newNode = new Node(data); 
+
+	// Assign to head 
+	if (head == NULL) { 
+		head = newNode; 
+		return; 
+	} 
+
+	// Traverse till end of list 
+	Node* temp = head; 
+	while (temp->next != NULL) { 
+
+		// Update temp 
+		temp = temp->next; 
+	} 
+
+	// Insert at the last. 
+	temp->next = newNode; 
+} 
+
+// Function to print the 
+// nodes of the linked list. 
+void Linkedlist::printList() 
+{ 
+	Node* temp = head; 
+
+	// Check for empty list. 
+	if (head == NULL) { 
+		cout << "List empty" << endl; 
+		return; 
+	} 
+
+	// Traverse the list. 
+	while (temp != NULL) { 
+		cout << temp->data << " "; 
+		temp = temp->next; 
+	} 
+} 
+
+// Driver Code 
+int main() 
+{ 
+	Linkedlist list; 
+
+	// Inserting nodes 
+	list.insertNode(1); 
+	list.insertNode(2); 
+	list.insertNode(3); 
+	list.insertNode(4); 
+
+	cout << "Elements of the list are: "; 
+
+	// Print the list 
+	list.printList(); 
+	cout << endl; 
+
+	// Delete node at position 2. 
+	list.deleteNode(2); 
+
+	cout << "Elements of the list are: "; 
+	list.printList(); 
+	cout << endl; 
+	return 0; 
 }
