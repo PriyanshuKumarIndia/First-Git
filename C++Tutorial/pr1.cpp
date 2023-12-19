@@ -29,7 +29,30 @@ class LinkedList{
     void reverseLL();
 
     void deleteNode();
+
+    void deleteNode(int pos);
+
+    int sizeOfLL();
 };
+
+int main(){
+    LinkedList List1;
+    List1.insertNode(45);
+    List1.insertNode(34);
+    List1.insertNode(89);
+    List1.insertNode(12);
+    cout<<"List before Reversing :"<<endl;
+    List1.display();
+    List1.reverseLL();
+    cout<<"List After Reversing :"<<endl;
+    List1.display();
+    cout<<"Size of linked list is :"<<List1.sizeOfLL()<<endl;
+    List1.deleteNode(5);
+    cout<<"List After Deleting random node :"<<endl;
+    List1.display();
+    cout<<"Size of linked list is :"<<List1.sizeOfLL()<<endl;
+
+}
 
 void LinkedList::insertNode(int data){
     Node *newNode= new Node(data);
@@ -76,19 +99,33 @@ void LinkedList::deleteNode(){
     delete temp2;
 }
 
-int main(){
-    LinkedList List1;
-    List1.insertNode(45);
-    List1.insertNode(34);
-    List1.insertNode(89);
-    List1.insertNode(12);
-    cout<<"List before Reversing :"<<endl;
-    List1.display();
-    List1.reverseLL();
-    cout<<"List After Reversing :"<<endl;
-    List1.display();
-    List1.deleteNode();
-    cout<<"List After Deleting Last Element :"<<endl;
-    List1.display();
+void LinkedList:: deleteNode(int pos){
+    if(sizeOfLL()<pos){
+        cout<<"Out of bound."<<endl;
+        return;
+    }
+    Node* ptr1=head,*ptr2=head->next;
+    if(pos==1){
+        head=ptr2;
+        delete ptr1;
+    }
+    if(pos==2){
+        ptr1->next=ptr2->next;
+        delete ptr2;
+    }
+    for(int i=3;i<=pos;i++){
+        ptr1=ptr1->next;
+        ptr2=ptr2->next;
+    }
+    ptr1->next=ptr2->next;
+    delete ptr2;
+}
 
+int LinkedList:: sizeOfLL(){
+    Node*temp=head;
+    int count=0;
+    while(temp!=NULL){
+        count++;
+        temp=temp->next;
+    }return count;
 }

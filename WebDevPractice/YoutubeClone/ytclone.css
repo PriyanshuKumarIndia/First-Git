@@ -1,10 +1,19 @@
 .Header{
+    background-color: white;
     margin-bottom: 10px;
-    height: 55px;
+    height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    /* border: none; */
+    border-bottom-width: 1px; 
+    border-bottom-style: solid;
+    border-bottom-color: rgb(196,196,196);
+    z-index: 2;   
 }
 
 .Upload-img{
@@ -16,7 +25,7 @@
     border-radius: 15px;
 }
 
-.R1{
+.R1,.R2{
     height: 30px;
     width: 40px;
 }
@@ -54,9 +63,10 @@
 }
 
 .Search-button{
-    height: 38px;
+    display: flex;
+    height: 39px;
     width: 60px;
-    padding: 0px 15px;
+    padding: 5px 15px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     margin-right: 15px;
@@ -64,10 +74,49 @@
     border-style: solid;
     border-color: rgb(96,96,96);
     margin-left: -1px;
-    /* border-left-width: 0px; */
+    position: relative;
+}
+
+.Search-button .Tooltip{
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    color: black;
+    bottom: -39px;
+    left: 0px;
+    background-color: gray;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.Search-button:hover .Tooltip{
+    opacity: 1;
+}
+
+.Voice-button:hover .Tooltip{
+    opacity: 1;
+}
+
+.Voice-button .Tooltip{
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    color: black;
+    width: 140px;
+    bottom: -39px;
+    left: -50px;
+    padding: 4px 3px;
+    background-color: gray;
+    border-radius: 6px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .Voice-button{
+    display: flex;
+    align-items: center;
     height: 38px;
     width: 38px;
     border-radius: 30px;
@@ -75,6 +124,7 @@
     border-width: 1px;
     border-style: solid;
     border-color: rgb(96,96,96);
+    position: relative;
 }
 
 .Left-portion{
@@ -101,10 +151,80 @@
     margin-right: 10px;
 }
 
+.Notification-count{
+    position: absolute;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    top: -3px;
+    right: 8px;
+    padding: 0px 5px;
+    border-radius: 8px;
+}
+
+.R2{
+    position: relative;
+}
+
+.Side-bar{
+    position: fixed;
+    left: 0px;
+    top: 60px;
+    bottom: 0px;
+    width: 70px;
+    z-index: 5;
+    background-color: white;
+}
+
+.T1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.Home-button{
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Home-button:hover{
+    height: 90px;
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.Home-img{
+    height: 30px;
+    width: 60px;
+}
+
+.Abs-prac{
+    background-color: black;
+    color: white;
+    position: absolute;
+    right: 8px;
+    bottom: 25px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.Image-portion{
+    position: relative;
+}
+
+
 
 
 body{
     margin: 0px;
+    padding-top: 85px;
+    padding-left: 65px;
+    margin-bottom: 3000px;
+    background-color: lightgray;
 }
 
 .Main{
@@ -113,6 +233,25 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     column-gap: 15px;
     row-gap: 40px;
+    margin: 0px 30px;
+}
+
+@media (max-width: 800px){
+    .Main{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 801px) and (max-width : 1199px){
+    .Main{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1200px){
+    .Main{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
 
 .Cat{
