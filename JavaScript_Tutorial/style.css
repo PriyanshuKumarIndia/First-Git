@@ -1,0 +1,14 @@
+/* #demo-button{
+    background-color: rgb(41, 118, 196);
+    color: red;
+} */
+
+.dark{
+    background-color: black;
+    color: white;
+}
+
+.light{
+    background-color: white;
+    color: black;
+}

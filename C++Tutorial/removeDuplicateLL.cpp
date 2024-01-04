@@ -19,8 +19,9 @@ bool Find(vector<int> arr,int key);
 
 void display(Node* head);
 
-pair<Node*,Node*> divideCLL(Node* head);
+void removeDuplicatesSorted(Node* head);
 
+void removeDuplicatesUnsorted(Node* head);
 
 int main(){
 	
@@ -30,26 +31,22 @@ int main(){
 	Node*third=new Node;
 	Node*fourth=new Node;
 	Node*fifth=new Node;
-	Node* sixth=new Node;
 	head=first;
 	first->data=6;
 	second->data=7;
 	third->data=8;
 	fourth->data=9;
 	fifth->data=6;
-	sixth->data=90;
 	first->next=second;
 	second->next=third;
 	third->next=fourth;
 	fourth->next=fifth;
-	fifth->next=sixth;
-	sixth->next=head;
-	cout<<"Before division :"<<endl;
+	fifth->next=NULL;
+	cout<<"Before removing :"<<endl;
 	display(head);
-	pair<Node*,Node*> ans=divideCLL(head);
-	cout<<"After division :"<<endl;
-	display(ans.first);
-	display(ans.second);
+	removeDuplicatesUnsorted(head);
+	cout<<"After removing :"<<endl;
+	display(head);
 }
 
 bool Find(vector<int> arr,int key){
@@ -66,28 +63,40 @@ bool Find(vector<int> arr,int key){
 void display(Node* head){
 	Node* ptr =head;
 	do{
-		cout<<ptr->data<<" ";
+		cout<<ptr->data<<" "<<ptr<<endl;
 		ptr=ptr->next;
 	}while(ptr!=NULL && ptr!=head);
 	cout<<endl;
 }
 
-pair<Node*,Node*> divideCLL(Node* head){
-	pair<Node*,Node*> ans;
-	Node *fast=head,*slow=head;
-	while(fast->next!=head && fast->next->next!=head){
-		fast=fast->next->next;
-		slow=slow->next;
+void removeDuplicatesSorted(Node* head){
+	Node* ptr=head;
+	while(ptr->next!=NULL){
+		if(ptr->data == ptr->next->data){
+			Node* temp=ptr->next;
+			ptr->next=temp->next;
+			delete temp;
+			continue;
+		}
+		ptr=ptr->next;
 	}
-	Node*temp = slow->next;
-	slow->next=head;
-	ans.first=head;
-	if(fast->next==head){
-		fast->next=temp;
+}
+
+void removeDuplicatesUnsorted(Node* head){
+	Node* ptr=head,*temp=NULL;
+	vector<int> arr;
+	while(ptr!=NULL){
+		if(!Find(arr,ptr->data)){
+			arr.push_back(ptr->data);
+			temp=ptr;
+			ptr=ptr->next;
+			continue;
+		}
+		else{
+			temp->next=ptr->next;
+			Node* T=ptr;
+			ptr=ptr->next;
+			delete T;
+		}
 	}
-	else{
-		fast->next->next=temp;
-	}
-	ans.second=temp;
-	return ans;
 }

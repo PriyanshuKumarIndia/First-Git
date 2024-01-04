@@ -2,8 +2,8 @@
 using namespace std;
 
 int main(){
-    string str="Hello India!";
-    str[0]='w';
-    cout<<str;
+    string str="Pzriyanshu";
+    int k=str.find("k");
+    cout<<k;
 
 }
